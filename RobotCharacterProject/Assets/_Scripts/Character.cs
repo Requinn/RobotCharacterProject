@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     public RotatedEvent OnRotation;
 
     /// <summary>
-    /// Is the player currently travelling in the Z-Axis?
+    /// Is the player currently moving in the Z-plane?
     /// </summary>
     /// <returns></returns>
     public bool IsCurrentPlaneZ() {
@@ -35,11 +35,15 @@ public class Character : MonoBehaviour
         if (_canMove) {
             //side to side movement
             float movement = Input.GetAxis("Horizontal");
+            //determine facing direction
+            UpdateFacingDirection(movement);
+
+            //Do movements
             if (_isInZPlane) {
                 _movementComponent.Move(0, movement);
             }
             else {
-                _movementComponent.Move(movement, 0);
+                _movementComponent.Move(-movement, 0);
             }
 
             //jumping, don't really need to get the vertical axis as this is impulse
@@ -61,6 +65,33 @@ public class Character : MonoBehaviour
             }
             else {
                 _canInteract = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Change rotation of the player depending on on the direciton they are moving
+    /// </summary>
+    /// <param name="movement"></param>
+    private void UpdateFacingDirection(float movement) {
+        if (movement > 0) {
+            //if we are moving right in the z plane
+            if (_isInZPlane) {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            //moving right in the x plane
+            if (!_isInZPlane) {
+                transform.rotation = Quaternion.Euler(0, -90f, 0);
+            }
+        }
+        else if (movement < 0) {
+            //if we are moving left in the z plane
+            if (_isInZPlane) {
+                transform.rotation = Quaternion.Euler(0, 180f, 0);
+            }
+            //moving left in the x plane
+            if (!_isInZPlane) {
+                transform.rotation = Quaternion.Euler(0, 90f, 0);
             }
         }
     }

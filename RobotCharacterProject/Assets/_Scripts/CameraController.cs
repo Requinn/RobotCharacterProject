@@ -17,12 +17,16 @@ public class CameraController : MonoBehaviour
         _character.OnRotation += RotateCamera;    
     }
 
+    /// <summary>
+    /// Apply rotation to the camera to match the player
+    /// </summary>
+    /// <param name="isZplane"></param>
     private void RotateCamera(bool isZplane) {
         Vector3 rotationToMake = Vector3.zero;
         //if in Z plane, rotate -90 around the player as axis
         if (isZplane) {
             rotationToMake.y = -90f;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else {
             rotationToMake.y = 90f;
@@ -42,7 +46,7 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3(_character.transform.position.x + _cameraDistance, _character.transform.position.y + 0.75f, _character.transform.position.z);
         }
         else {
-            transform.position = new Vector3(_character.transform.position.x, _character.transform.position.y + 0.75f, _character.transform.position.z - _cameraDistance);
+            transform.position = new Vector3(_character.transform.position.x, _character.transform.position.y + 0.75f, _character.transform.position.z + _cameraDistance);
         }
     }
 }
