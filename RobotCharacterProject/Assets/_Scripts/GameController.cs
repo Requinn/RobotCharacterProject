@@ -35,23 +35,16 @@ public class GameController : MonoBehaviour
         _playerRef = FindObjectOfType<Character>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public Character GetPlayerReference() {
         return _playerRef;
     }
 
     public LevelLoader GetSceneLoader() {
         return _sceneLoader;
+    }
+
+    public void GameOver() {
+        //Pop up game over UI
+        Debug.Log("GameOver");
     }
 }

@@ -12,7 +12,7 @@ public class ObjectRotator : Interactable
     [SerializeField]
     private float _rotateSpeed = 2f;
     [SerializeField]
-    private GameObject _objectToRotate;
+    private GameObject _objectToRotate = null;
 
     [SerializeField]
     private bool _oneUse = true;

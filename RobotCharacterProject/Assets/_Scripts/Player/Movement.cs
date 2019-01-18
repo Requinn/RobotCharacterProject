@@ -33,7 +33,6 @@ public class Movement : MonoBehaviour
         _controller.Move(_movement * Time.deltaTime);
 
         _inAir = IsGrounded();
-        Debug.Log(_inAir);
         if (!_inAir) {
             _movement += Physics.gravity * Time.deltaTime;
         }

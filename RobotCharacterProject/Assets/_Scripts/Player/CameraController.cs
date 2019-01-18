@@ -8,8 +8,7 @@ public class CameraController : MonoBehaviour
     private Character _character;
     private bool _isInZPlane = false;
     [SerializeField]
-    private float _cameraDistance = 12f;
-
+    private float _cameraDistance = 12f, _cameraHeight = 1.75f;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +42,10 @@ public class CameraController : MonoBehaviour
     {
         //Camera's movement depents on which plane we are in
         if (!_isInZPlane) {
-            transform.position = new Vector3(_character.transform.position.x + _cameraDistance, _character.transform.position.y + 0.75f, _character.transform.position.z);
+            transform.position = new Vector3(_character.transform.position.x + _cameraDistance, _character.transform.position.y + _cameraHeight, _character.transform.position.z);
         }
         else {
-            transform.position = new Vector3(_character.transform.position.x, _character.transform.position.y + 0.75f, _character.transform.position.z + _cameraDistance);
+            transform.position = new Vector3(_character.transform.position.x, _character.transform.position.y + _cameraHeight, _character.transform.position.z + _cameraDistance);
         }
     }
 }

@@ -147,4 +147,14 @@ public class Character : MonoBehaviour
             _isInZPlane = true;
         }
     }
+
+    /// <summary>
+    /// Handle player death and relay to GameController
+    /// </summary>
+    public void Kill() {
+        _canInteract = false;
+        SetMovement(false);
+        gameObject.SetActive(false);
+        GameController.Instance.GameOver();
+    }
 }
