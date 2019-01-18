@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     private Vector3 _approximateCenterHeight; //since transform root is at feet, center of body is adjusted to a proper height
     private RaycastHit _hit;
     private bool _canInteract = false, _canMove = true;
+    private Interactable _selectedInteractable = null;
 
     //for when the player rotates
     public delegate void RotatedEvent(bool isZplane);
@@ -67,6 +68,19 @@ public class Character : MonoBehaviour
         }
         //tell the animator our current movement value
         _animationComponent.SetSpeed(Mathf.Abs(movement));
+
+        if (_movementComponent.IsGrounded()) {
+            Physics.Raycast(transform.position + _approximateCenterHeight, transform.forward, out _hit, 2f);
+            if (_hit.collider) {
+                _selectedInteractable = _hit.collider.GetComponent<Interactable>();
+                if(_selectedInteractable) _selectedInteractable.ToggleHighlight();
+            }
+            else {
+                _selectedInteractable = null;
+            }
+        }else {
+            _selectedInteractable = null;
+        }
     }
 
     /// <summary>
@@ -102,9 +116,8 @@ public class Character : MonoBehaviour
     private IEnumerator Punch() {
         SetMovement(false);
         yield return new WaitForSeconds(1.25f);
-        Physics.Raycast(transform.position + _approximateCenterHeight, transform.forward, out _hit, 2f);
-        if (_hit.collider) {
-            _hit.collider.GetComponent<Interactable>().Interact();
+        if (_selectedInteractable) {
+            _selectedInteractable.Interact();
         }
         yield return new WaitForSeconds(0.1f);
         SetMovement(true);

@@ -9,7 +9,9 @@ public class Interactable : MonoBehaviour
 {
     [Header("Base Interactable Properties")]
     [SerializeField]
-    private Material _unSelected, _selected;
+    private Material _unSelected;
+    [SerializeField]
+    private Material _selected;
     private bool _isSelected = false;
     private Renderer _renderer;
 
