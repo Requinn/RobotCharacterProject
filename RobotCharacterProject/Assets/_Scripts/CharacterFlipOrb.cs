@@ -21,9 +21,13 @@ public class CharacterFlipOrb : Interactable
         Debug.Log(GameController.Instance.GetPlayerReference().transform.position + "  "+  transform.position);
     }
 
+    /// <summary>
+    /// Flip the player to the new plane
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator FlipRoutine() {
         _characterRef.SetMovement(false);
-        _characterRef.transform.position = transform.position;
+        _characterRef.transform.position = transform.position - new Vector3(0,.75f,0);
         yield return _delay;
         _characterRef.RotateForward();        
         _characterRef.SetMovement(true);

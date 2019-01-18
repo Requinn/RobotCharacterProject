@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Character Controller class. Handles inputs for movement and interactions.
+/// </summary>
 public class Character : MonoBehaviour
 {
     private Movement _movementComponent;
@@ -10,6 +13,18 @@ public class Character : MonoBehaviour
     private Vector3 _approximateCenterHeight; //since transform root is at feet, center of body is adjusted to a proper height
     private RaycastHit _hit;
     private bool _canInteract = false, _canMove = true;
+
+    //for when the player rotates
+    public delegate void RotatedEvent(bool isZplane);
+    public RotatedEvent OnRotation;
+
+    /// <summary>
+    /// Is the player currently travelling in the Z-Axis?
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCurrentPlaneZ() {
+        return _isInZPlane;
+    }
 
     private void Start() {
         _movementComponent = GetComponent<Movement>();
@@ -19,11 +34,12 @@ public class Character : MonoBehaviour
     private void Update() {
         if (_canMove) {
             //side to side movement
+            float movement = Input.GetAxis("Horizontal");
             if (_isInZPlane) {
-                _movementComponent.Move(0, Input.GetAxis("Horizontal"));
+                _movementComponent.Move(0, movement);
             }
             else {
-                _movementComponent.Move(Input.GetAxis("Horizontal"), 0);
+                _movementComponent.Move(movement, 0);
             }
 
             //jumping, don't really need to get the vertical axis as this is impulse
@@ -69,6 +85,7 @@ public class Character : MonoBehaviour
     /// Rotate the player to a new plane
     /// </summary>
     public void RotateForward() {
+        OnRotation(_isInZPlane);
         if (_isInZPlane) {
             transform.forward = transform.right;
             _isInZPlane = false;
