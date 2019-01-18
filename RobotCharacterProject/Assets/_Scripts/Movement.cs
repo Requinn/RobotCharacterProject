@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     private float _speed, _jumpHeight;
 
     private float _centerToGround;
-    private bool _canMove, _inAir;
+    private bool _canMove = true, _inAir = false;
     private Vector3 _movement;
 
     // Start is called before the first frame update
@@ -28,11 +28,12 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _movement.x = 0; //remove any front to back movement
+        if (!_canMove) { return; }
         //_movement = transform.TransformDirection(_movement);
         _controller.Move(_movement * Time.deltaTime);
 
         _inAir = IsGrounded();
+        Debug.Log(_inAir);
         if (!_inAir) {
             _movement += Physics.gravity * Time.deltaTime;
         }
@@ -53,8 +54,17 @@ public class Movement : MonoBehaviour
     /// <summary>
     /// Move the character by movement speed in direction
     /// </summary>
-    public void Move(float direction) {
-        _movement.z = direction * _speed;
+    public void Move(float xDir, float zDir) {
+        _movement.x = xDir * _speed;
+        _movement.z = zDir * _speed;
+    }
+
+    /// <summary>
+    /// Allows this Movement to update
+    /// </summary>
+    /// <param name="canMove"></param>
+    public void SetMovement(bool canMove) {
+        _canMove = canMove;
     }
 
     private RaycastHit _hitInfo;
