@@ -739,7 +739,6 @@ GameObject:
   m_Component:
   - component: {fileID: 520652191}
   - component: {fileID: 520652192}
-  - component: {fileID: 520652193}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -774,19 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerRef: {fileID: 0}
-  _sceneLoader: {fileID: 520652193}
---- !u!114 &520652193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520652190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b574681132aee4b9f5da604f4142a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _sceneLoader: {fileID: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,10 +1111,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 35714d3ee86231c4f8f420ef5d1ef801, type: 2}
-    - target: {fileID: 100028, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
 --- !u!1 &926916725 stripped
@@ -1179,18 +1162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpHeight: 5
---- !u!114 &926916729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926916725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49194247ad0d2094a9a2514c88f97e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &962189644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,8 +2435,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616520963}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.941132, y: -34.67682, z: -25.81}
-  m_LocalScale: {x: 4.164015, y: 3.5207798, z: 2.747887}
+  m_LocalPosition: {x: 14.941132, y: -34.67682, z: -25.549397}
+  m_LocalScale: {x: 4.164015, y: 2.6771955, z: 3.0537167}
   m_Children: []
   m_Father: {fileID: 1118189487}
   m_RootOrder: 5

@@ -9,7 +9,9 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     private Movement _movementComponent;
-    private bool _isInZPlane = true;
+    private AnimationHandler _animationComponent;
+
+    private bool _isInZPlane = true; //are we moving along the z-axis
     private Vector3 _approximateCenterHeight; //since transform root is at feet, center of body is adjusted to a proper height
     private RaycastHit _hit;
     private bool _canInteract = false, _canMove = true;
@@ -28,13 +30,15 @@ public class Character : MonoBehaviour
 
     private void Start() {
         _movementComponent = GetComponent<Movement>();
+        _animationComponent = GetComponent<AnimationHandler>();
         _approximateCenterHeight = new Vector3(0f, 0.75f, 0f);
     }
 
+    float movement;
     private void Update() {
         if (_canMove) {
             //side to side movement
-            float movement = Input.GetAxis("Horizontal");
+            movement = Input.GetAxis("Horizontal");
             //determine facing direction
             UpdateFacingDirection(movement);
 
@@ -49,24 +53,20 @@ public class Character : MonoBehaviour
             //jumping, don't really need to get the vertical axis as this is impulse
             if ((Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKeyDown(KeyCode.W))) && _movementComponent.IsGrounded()) {
                 _movementComponent.Jump();
+                _animationComponent.DoJump();
+            }
+            //punching aka interacting only when on ground
+            if (Input.GetKeyDown(KeyCode.Space) && _movementComponent.IsGrounded()) {
+                _animationComponent.DoPunch();
+                StartCoroutine(Punch());
             }
         }
-        //punching aka interacting
-        if(Input.GetKeyDown(KeyCode.Space) && _movementComponent.IsGrounded() && _canInteract) {
-            Punch();
+        //since we aren't moving, set movement to 0
+        else {
+            movement = 0;
         }
-        //check front for a punchable object
-        //raycast forward, check for grounded, then punch
-        if (_movementComponent.IsGrounded()) {
-            Debug.DrawLine(transform.position + _approximateCenterHeight, transform.position + _approximateCenterHeight + transform.forward * 1.5f, Color.red);
-            Physics.Raycast(transform.position + _approximateCenterHeight, transform.forward, out _hit, 1f);
-            if (_hit.collider && _hit.collider.CompareTag("Interactable")) {
-                _canInteract = true;
-            }
-            else {
-                _canInteract = false;
-            }
-        }
+        //tell the animator our current movement value
+        _animationComponent.SetSpeed(Mathf.Abs(movement));
     }
 
     /// <summary>
@@ -97,10 +97,18 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
-    /// Interact with stuff
+    /// Interact with stuff by punching them, punch animation is slow, so it has the delay to match
     /// </summary>
-    private void Punch() {
-        _hit.collider.GetComponent<Interactable>().Interact();
+    private IEnumerator Punch() {
+        SetMovement(false);
+        yield return new WaitForSeconds(1.25f);
+        Physics.Raycast(transform.position + _approximateCenterHeight, transform.forward, out _hit, 2f);
+        if (_hit.collider) {
+            _hit.collider.GetComponent<Interactable>().Interact();
+        }
+        yield return new WaitForSeconds(0.1f);
+        SetMovement(true);
+        yield return null;
     }
 
     /// <summary>
@@ -122,7 +130,7 @@ public class Character : MonoBehaviour
             _isInZPlane = false;
         }
         else {
-            transform.forward = -transform.right;
+            transform.forward = transform.right;
             _isInZPlane = true;
         }
     }
