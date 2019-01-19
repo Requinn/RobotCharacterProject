@@ -5,7 +5,7 @@
 		_MainTex("Base(RGB)", 2D) = "white" {}
 		_Color("Main Color", Color) = (0.5,0.5,0.5,1)
 		_OutlineColor("Outline Color", Color) = (0,0,0,1)
-		_Outline("Outline Thickness", Range(0.0 , 0.5)) = 0.05
+		_Outline("Outline Thickness", Range(0.0 , .5)) = 0.075
 	}
 
 		CGINCLUDE

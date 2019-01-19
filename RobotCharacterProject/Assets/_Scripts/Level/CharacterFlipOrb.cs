@@ -12,7 +12,8 @@ public class CharacterFlipOrb : Interactable
     private WaitForSeconds _delay = new WaitForSeconds(.1f);
     private Vector3 _adjustedPosition;
 
-    private void Start() {
+    public override void Start() {
+        base.Start();
         _adjustedPosition = transform.position;
         _characterRef = GameController.Instance.GetPlayerReference();
     }
