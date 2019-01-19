@@ -1,8 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2126657523647148116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2482728653816723474}
+  - component: {fileID: 3346654988062502932}
+  - component: {fileID: 3500726906225826323}
+  m_Layer: 0
+  m_Name: ReflectZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2482728653816723474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126657523647148116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.103, y: 0.936, z: 0.69000006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4409709283135237168}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3346654988062502932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126657523647148116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8320037, y: 1.8950529, z: 2.3223355}
+  m_Center: {x: 0.07018429, y: -0.071202755, z: 0.66116774}
+--- !u!114 &3500726906225826323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126657523647148116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9101d33fccb6fcd459dedc47f590f8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _perfectRangeMin: 1
+  _perfectRangeMax: 1.5
 --- !u!1 &4409709283135139856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100028, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+  m_PrefabInstance: {fileID: 4409709283135108780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4409709283135237168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400028, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
   m_PrefabInstance: {fileID: 4409709283135108780}
   m_PrefabAsset: {fileID: 0}
 --- !u!143 &926916726
@@ -35,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d35b7db6e48dec42ba6a0757c36e1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 5
+  _reflectionHitBox: {fileID: 3500726906225826323}
 --- !u!114 &926916728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100028, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
       propertyPath: m_Name
-      value: RoboTest
+      value: RoboPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
       propertyPath: m_Controller

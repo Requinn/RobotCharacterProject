@@ -26,13 +26,17 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// Change the velocity of this projectile
     /// </summary>
-    /// <param name="newDirection"></param>
-    /// <param name="newSpeed"></param>
-    public void ChangeVelocity(Vector3 newDirection, float newSpeed) {
+    /// <param name="newVelocity"></param>
+    public void ChangeVelocity(Vector3 newVelocity) {
         //could rotate the projectiles to face direction, but they're also just spheres right now so it doesn't matter really
-        _rb.velocity = newDirection * newSpeed;
+        _rb.velocity = newVelocity;
     }
 
-
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player") || other.CompareTag("Base")) {
+            GameController.Instance.GetPlayerReference().TakeDamage();
+            Destroy(gameObject);
+        }
+    }
 
 }

@@ -10,6 +10,9 @@ public class Character : MonoBehaviour
 {
     [SerializeField]
     private int _health = 5;
+    [SerializeField]
+    private ReflectionHitBox _reflectionHitBox;
+
     private Movement _movementComponent;
     private AnimationHandler _animationComponent;
 
@@ -25,6 +28,14 @@ public class Character : MonoBehaviour
         _movementComponent = GetComponent<Movement>();
         _animationComponent = GetComponent<AnimationHandler>();
         _approximateCenterHeight = new Vector3(0f, 0.75f, 0f);
+    }
+
+    /// <summary>
+    /// get the adjusted center of the player
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetCenter() {
+        return transform.position + _approximateCenterHeight;
     }
 
     public bool isAlive() {
@@ -81,8 +92,9 @@ public class Character : MonoBehaviour
     /// </summary>
     private IEnumerator Punch() {
         SetMovement(false);
-        yield return new WaitForSeconds(.62f);
-        //activate a hitbox to deflect the projectil
+        yield return new WaitForSeconds(.55f);
+        //activate a hitbox to deflect the projectile
+        _reflectionHitBox.DoReflect();
         yield return new WaitForSeconds(0.1f);
         SetMovement(true);
         yield return null;
