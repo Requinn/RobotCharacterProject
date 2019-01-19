@@ -30,7 +30,7 @@ public class ObjectRotator : Interactable
     }
 
     private void Update() {
-        while (_isActive && progress >= 0 && progress < 1) {
+        if (_isActive && progress >= 0 && progress < 1) {
             progress += Time.deltaTime * _rotateSpeed;
             _objectToRotate.transform.rotation = Quaternion.Lerp(_startRotation, _finalRotation, progress);
         }
