@@ -119,9 +119,11 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) || (Input.GetKeyDown(KeyCode.S))) {
             RaycastHit hit;
             Physics.Raycast(GetCenter(), Vector3.down, out hit, 1f);
-            PassthroughPlatform p = hit.collider.GetComponent<PassthroughPlatform>();
-            if (p) {
-                p.DisableCollider();
+            if (hit.collider != null) {
+                PassthroughPlatform p = hit.collider.GetComponent<PassthroughPlatform>();
+                if (p) {
+                    p.DisableCollider();
+                }
             }
         }
     }
