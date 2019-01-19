@@ -114,13 +114,23 @@ public class Character : MonoBehaviour
             _movementComponent.Jump();
             _animationComponent.DoJump();
         }
+
+        //raycast down to check for a platform and disable its collider
+        if (Input.GetKeyDown(KeyCode.DownArrow) || (Input.GetKeyDown(KeyCode.S))) {
+            RaycastHit hit;
+            Physics.Raycast(GetCenter(), Vector3.down, out hit, 1f);
+            PassthroughPlatform p = hit.collider.GetComponent<PassthroughPlatform>();
+            if (p) {
+                p.DisableCollider();
+            }
+        }
     }
 
     /// <summary>
     /// Handles mouse Inputs
     /// </summary>
     private void MouseInput() {
-        //left click. cycle left up the array
+        //left click. Cycle colors up
         if (Input.GetMouseButtonDown(0)) {
             CycleColor(-1);
         }

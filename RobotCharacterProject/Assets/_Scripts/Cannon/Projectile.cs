@@ -40,8 +40,12 @@ public class Projectile : MonoBehaviour
         _rb.velocity = newVelocity;
     }
 
+    /// <summary>
+    /// On colliding with the player, or with the base if the color isn't black, do damage
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player") || other.CompareTag("Base")) {
+        if (other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black)) {
             GameController.Instance.GetPlayerReference().TakeDamage();
             Destroy(gameObject);
         }
