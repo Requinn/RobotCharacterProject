@@ -15,9 +15,9 @@ public class Cannon : MonoBehaviour
     [SerializeField]
     private float _projectileSpeed; //how fast does the projectile move
     [SerializeField]
-    private Transform _barrelPoint;
+    private GameObject _barrelPoint;
 
-    private ColorType _currentType;
+    private ColorCode.ColorType _currentType;
     private WaitForSeconds _fireWait;
 
     private void Start() {
@@ -34,8 +34,8 @@ public class Cannon : MonoBehaviour
             AssignColor();
             yield return _fireWait;
             //could object pool, but not enough projectiles to warrant for now?
-            Projectile p = Instantiate(_projectile, _barrelPoint.position, Quaternion.identity);
-            p.Initialize(_projectileSpeed, new ColorCode(_currentType));
+            Projectile p = Instantiate(_projectile, _barrelPoint.transform.position, _barrelPoint.transform.rotation);
+            p.Initialize(_projectileSpeed, _currentType);
             yield return null;
         }
     }
@@ -47,16 +47,16 @@ public class Cannon : MonoBehaviour
         int random = UnityEngine.Random.Range(0, 3);
         switch (random) {
             case 0:
-                _currentType = ColorType.orange;
+                _currentType = ColorCode.ColorType.orange;
                 break;
             case 1:
-                _currentType = ColorType.blue;
+                _currentType = ColorCode.ColorType.blue;
                 break;
             case 2:
-                _currentType = ColorType.purple;
+                _currentType = ColorCode.ColorType.purple;
                 break;
             case 3:
-                _currentType = ColorType.black;
+                _currentType = ColorCode.ColorType.black;
                 break;
         }
     }

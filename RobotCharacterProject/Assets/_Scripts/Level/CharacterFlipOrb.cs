@@ -29,7 +29,7 @@ public class CharacterFlipOrb : Interactable
         _characterRef.SetMovement(false);
         _characterRef.transform.position = transform.position - new Vector3(0,.75f,0);
         yield return _delay;
-        _characterRef.RotateForward();        
+        //_characterRef.RotateForward();        
         _characterRef.SetMovement(true);
         yield return null;
     }
