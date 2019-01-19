@@ -399,7 +399,7 @@ MonoBehaviour:
   _selectedColor: {r: 0, g: 0.49680614, b: 1, a: 0.8}
   _isSelected: 0
   _rotationToApply: {x: 80, y: 0, z: 0}
-  _rotateSpeed: 0.1
+  _rotateSpeed: 0.25
   _objectToRotate: {fileID: 1943522693}
   _oneUse: 1
 --- !u!135 &243363391
@@ -834,7 +834,7 @@ Transform:
   m_GameObject: {fileID: 506956304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5.224378, z: -1.5772071}
-  m_LocalScale: {x: 5, y: 10, z: 5}
+  m_LocalScale: {x: 5, y: 12.291032, z: 5}
   m_Children: []
   m_Father: {fileID: 1943522694}
   m_RootOrder: 0

@@ -19,7 +19,6 @@ public class CharacterFlipOrb : Interactable
     }
     public override void Interact() {
         StartCoroutine(FlipRoutine());
-        Debug.Log(GameController.Instance.GetPlayerReference().transform.position + "  "+  transform.position);
     }
 
     /// <summary>

@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour
     private Color _selectedColor = new Color(1,0.7f,0,0.8f); //orange
     private float _selectedAlpha = 0.8f, _unselectedAlpha = 0f;
     public bool _isSelected = false;
-    private Renderer _renderer;
+    protected Renderer _renderer;
     private Material _outlineShaderMat;
 
     public virtual void Start() {
@@ -29,12 +29,11 @@ public class Interactable : MonoBehaviour
     /// Change the material to indicate that this is the selected object
     /// </summary>
     public void ToggleHighlight() {
-        Debug.Log("Toggling");
         _isSelected = true;
         _selectedColor.a = _selectedAlpha;
     }
 
-    private void Update() {
+    public virtual void Update() {
         if (!_renderer) { return; }
         _outlineShaderMat.SetColor("_OutlineColor", _selectedColor);
         //reset every frame in case we look away

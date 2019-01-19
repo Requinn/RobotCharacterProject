@@ -20,8 +20,13 @@ public class ObjectRotator : Interactable
     private Quaternion _finalRotation, _startRotation;
     private float progress = 0;
     private bool _isActive = false;
+
     public override void Interact() {
         if (_objectToRotate ) {
+            if (_oneUse) {
+                _renderer.enabled = false;
+                GetComponent<Collider>().enabled = false;
+            }
             _startRotation = _objectToRotate.transform.rotation;
             _finalRotation = Quaternion.Euler(_objectToRotate.transform.rotation.eulerAngles + _rotationToApply);
             _isActive = true;
@@ -29,7 +34,8 @@ public class ObjectRotator : Interactable
         }    
     }
 
-    private void Update() {
+    public override void Update() {
+        base.Update();
         if (_isActive && progress >= 0 && progress < 1) {
             progress += Time.deltaTime * _rotateSpeed;
             _objectToRotate.transform.rotation = Quaternion.Lerp(_startRotation, _finalRotation, progress);

@@ -1,18 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
 
-public class ShaderInspector : MonoBehaviour
+/// <summary>
+/// custom shader inspector to show only the outline thickness and color for the shader
+/// </summary>
+public class ShaderInspector : ShaderGUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    MaterialEditor editor;
+    MaterialProperty[] properties;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties) {
+        //base.OnGUI(materialEditor, properties);
+
+        editor = materialEditor;
+        this.properties = properties;
+
+        MaterialProperty _outlineColor = FindProperty("_OutlineColor", properties);
+        MaterialProperty _outlineThickness = FindProperty("_Outline", properties);
+
+        materialEditor.ShaderProperty(_outlineColor, "Outline Color");
+        materialEditor.ShaderProperty(_outlineThickness, "Outline Thickness");
     }
 }

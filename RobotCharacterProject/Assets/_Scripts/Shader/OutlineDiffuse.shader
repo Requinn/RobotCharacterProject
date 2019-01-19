@@ -103,5 +103,5 @@
 			}
 			}
 				Fallback "Diffuse"
-
+				CustomEditor "ShaderInspector"
 }
