@@ -48,6 +48,8 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black)) {
             GameController.Instance.GetPlayerReference().TakeDamage();
             Destroy(gameObject);
+        }else if((other.CompareTag("Base") && _assignedColor == ColorCode.ColorType.black)) {
+            Destroy(gameObject);
         }
     }
 

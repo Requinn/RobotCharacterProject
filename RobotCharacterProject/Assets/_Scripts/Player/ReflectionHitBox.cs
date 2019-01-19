@@ -27,7 +27,7 @@ public class ReflectionHitBox : MonoBehaviour
     }
 
     /// <summary>
-    /// reflect the projectile and return the distance you reflected at
+    /// reflect the projectile and return if it was a "perfect" reflect
     /// </summary>
     /// <returns>returns true on "perfect"</returns>
     public bool DoReflect(ColorCode.ColorType color) {
@@ -41,9 +41,11 @@ public class ReflectionHitBox : MonoBehaviour
             //sweet spot
             if(distance >= _perfectRangeMin && distance < _perfectRangeMax) {
                 p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity * 2f);
+                //GameController Add Score
                 return true;
             }else {
                 p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity);
+                //GameController Add Score
                 return false;
             }
         }else {
