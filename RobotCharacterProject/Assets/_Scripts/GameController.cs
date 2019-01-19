@@ -47,4 +47,8 @@ public class GameController : MonoBehaviour
         //Pop up game over UI
         Debug.Log("GameOver");
     }
+
+    public bool IsGameActive() {
+        return _playerRef.isAlive();
+    }
 }
