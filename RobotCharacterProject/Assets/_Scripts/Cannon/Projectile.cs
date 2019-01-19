@@ -5,9 +5,16 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody _rb;
-    private Color _assignedColor;
+    private ColorCode.ColorType _assignedColor;
     private Renderer _renderer;
 
+    /// <summary>
+    /// Get the type of color
+    /// </summary>
+    /// <returns></returns>
+    public ColorCode.ColorType GetColorType() {
+        return _assignedColor;
+    }
 
     /// <summary>
     /// Initialize this projectile's speed and color/type
@@ -18,9 +25,10 @@ public class Projectile : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = transform.forward * speed;
-        _assignedColor = ColorCode.ColorCoder.GetColor(cType);
-        _renderer.material.SetColor("_OutlineColor", _assignedColor);
-        _renderer.material.SetColor("_Color", _assignedColor);
+        _assignedColor = cType;
+        Color c = ColorCode.ColorCoder.GetColor(cType);
+        _renderer.material.SetColor("_OutlineColor", c);
+        _renderer.material.SetColor("_Color", c);
     }
 
     /// <summary>

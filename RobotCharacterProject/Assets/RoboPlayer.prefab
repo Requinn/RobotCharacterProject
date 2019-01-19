@@ -57,8 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9101d33fccb6fcd459dedc47f590f8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _perfectRangeMin: 1
-  _perfectRangeMax: 1.5
+  _perfectRangeMin: 1.2
+  _perfectRangeMax: 1.75
 --- !u!1 &4409709283135139856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100028, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 5
   _reflectionHitBox: {fileID: 3500726906225826323}
+  _limb1: {fileID: 4409709283135139850}
+  _limb2: {fileID: 4409709283135139854}
 --- !u!114 &926916728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +129,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49194247ad0d2094a9a2514c88f97e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4409709283135139854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+  m_PrefabInstance: {fileID: 4409709283135108780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4409709283135139850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+  m_PrefabInstance: {fileID: 4409709283135108780}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4409709283135108780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +146,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 13700002, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.103
@@ -190,5 +210,13 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 13700002, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 67ae4a2d87e6e744bbe5b88be27d1d39, type: 2}
+    - target: {fileID: 13700000, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}
+      propertyPath: m_Materials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: 67ae4a2d87e6e744bbe5b88be27d1d39, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c53ec4b53368423c8d252543d3a2905, type: 3}

@@ -20,7 +20,7 @@ public class ColorCode : MonoBehaviour
         _purple = new Color(0.89f, 0.0f, 1.0f, 1f);
 
 
-    public void Start() {
+    public void Awake() {
         ColorCoder = this;
     }
 

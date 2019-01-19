@@ -27,7 +27,7 @@
 		v2f vert(appdata v) {
 			//make a copy of incoming vertex data scaled to normal direction
 			v2f o;
-			v.vertex *= (1 + _Outline);
+			v.vertex *= (1 + _Outline); //add thickness to the vertex position
 			o.pos = UnityObjectToClipPos(v.vertex);
 			//set color at that vertex to whatever we have set
 			o.col = _OutlineColor;

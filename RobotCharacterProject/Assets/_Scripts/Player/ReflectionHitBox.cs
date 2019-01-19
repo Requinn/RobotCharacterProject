@@ -30,14 +30,20 @@ public class ReflectionHitBox : MonoBehaviour
     /// reflect the projectile and return the distance you reflected at
     /// </summary>
     /// <returns>returns true on "perfect"</returns>
-    public bool DoReflect() {
-        //distance to player
-        if (p) {
+    public bool DoReflect(ColorCode.ColorType color) {
+        if (p && p.GetColorType() == color) {
+            //super easy way to detect if projectile is in front of us by checking along the only axis we share with projectiles
+            if (p.transform.position.z < _owner.transform.position.z) {
+                return false;
+            }
+            //distance to player
             float distance = Vector3.Distance(_owner.GetCenter(), p.transform.position);
-            p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity);
+            //sweet spot
             if(distance >= _perfectRangeMin && distance < _perfectRangeMax) {
+                p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity * 2f);
                 return true;
             }else {
+                p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity);
                 return false;
             }
         }else {

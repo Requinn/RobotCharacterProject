@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         _character = GameController.Instance.GetPlayerReference();
-        _character.OnRotation += RotateCamera;    
+        //_character.OnRotation += RotateCamera;    
     }
 
     /// <summary>

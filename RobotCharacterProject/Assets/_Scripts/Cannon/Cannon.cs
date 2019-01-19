@@ -11,18 +11,22 @@ public class Cannon : MonoBehaviour
     [SerializeField]
     private Projectile _projectile;
     [SerializeField]
+    private float _initialDelay;
+    [SerializeField]
     private float _fireDelay; //time between shots
+    [SerializeField]
+    private float _fireDelayDeviation = 0.5f;
     [SerializeField]
     private float _projectileSpeed; //how fast does the projectile move
     [SerializeField]
     private GameObject _barrelPoint;
 
     private ColorCode.ColorType _currentType;
-    private WaitForSeconds _fireWait;
+    //private WaitForSeconds _fireWait;
 
     private void Start() {
         StartCoroutine(FiringRoutine());
-        _fireWait = new WaitForSeconds(_fireDelay);
+        //_fireWait = new WaitForSeconds(_fireDelay);
     }
 
     /// <summary>
@@ -30,9 +34,10 @@ public class Cannon : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     private IEnumerator FiringRoutine() {
+        yield return new WaitForSeconds(_initialDelay);
         while (GameController.Instance.IsGameActive()) {
             AssignColor();
-            yield return _fireWait;
+            yield return new WaitForSeconds(_fireDelay + UnityEngine.Random.Range(-_fireDelayDeviation, _fireDelayDeviation));
             //could object pool, but not enough projectiles to warrant for now?
             Projectile p = Instantiate(_projectile, _barrelPoint.transform.position, _barrelPoint.transform.rotation);
             p.Initialize(_projectileSpeed, _currentType);
@@ -44,7 +49,7 @@ public class Cannon : MonoBehaviour
     /// assigns a random color
     /// </summary>
     private void AssignColor() {
-        int random = UnityEngine.Random.Range(0, 3);
+        int random = UnityEngine.Random.Range(0, 4);
         switch (random) {
             case 0:
                 _currentType = ColorCode.ColorType.orange;
