@@ -18,9 +18,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - PlayerDeterrent
+  - Player
+  - Projectile
   - 
   - 
   - 
