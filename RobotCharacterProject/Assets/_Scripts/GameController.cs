@@ -10,7 +10,6 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     private Character _playerRef;
-    private PauseController _pauseController;
 
     public delegate void GameOverEvent();
     public GameOverEvent OnGameWin, OnPlayerDeath;
@@ -36,15 +35,15 @@ public class GameController : MonoBehaviour
     /// <param name="arg0"></param>
     /// <param name="arg1"></param>
     private void UpdateReferences(Scene arg0, Scene arg1) {
+        //don't bother on main screen
         if(arg1.buildIndex == 0) { return; }
         //get ref to player, and their death event
         _playerRef = FindObjectOfType<Character>();
         _playerRef.OnDeath += GameLoss;
         //get the death event of the enemy
         FindObjectOfType<CannonController>().OnDeath += GameWon;
-
-        _pauseController = FindObjectOfType<PauseController>();
-        _pauseController.OnPause += UpdatePauseState;
+        //get pause event
+        FindObjectOfType<PauseController>().OnPause += UpdatePauseState;
 
         _isGameActive = true;
         _isGamePaused = false;
