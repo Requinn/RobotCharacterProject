@@ -7,6 +7,12 @@ using System.Collections;
 /// </summary>
 public class LevelLoader : MonoBehaviour
 {
+    public delegate void StartLoadEvent();
+    public StartLoadEvent OnStartLoad;
+
+    public delegate void EndLoadEvent();
+    public EndLoadEvent OnEndLoad;
+     
     /// <summary>
     /// Loads the next scene in the build settings
     /// </summary>
@@ -45,6 +51,7 @@ public class LevelLoader : MonoBehaviour
     /// <param name="index"></param>
     /// <returns></returns>
     private IEnumerator LoadSceneAsync(int index) {
+        if(OnStartLoad != null) OnStartLoad();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(index);
         asyncLoad.allowSceneActivation = false;
 
@@ -55,6 +62,7 @@ public class LevelLoader : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.5f);
+        if (OnEndLoad != null) OnEndLoad();
         asyncLoad.allowSceneActivation = true;
     }
 }

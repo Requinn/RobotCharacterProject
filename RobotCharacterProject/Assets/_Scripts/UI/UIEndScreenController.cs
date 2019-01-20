@@ -13,9 +13,12 @@ public class UIEndScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //For some reason GameController was holding onto an old version of this script and calling it on the event
-        //GameController.Instance.OnGameWin += ShowWinScreen;
-        //GameController.Instance.OnPlayerDeath += ShowLossScreen;
+        //clear out old Controller event subs
+        GameController.Instance.OnGameWin = null;
+        GameController.Instance.OnPlayerDeath = null;
+        //get new subs
+        GameController.Instance.OnGameWin += ShowWinScreen;
+        GameController.Instance.OnPlayerDeath += ShowLossScreen;
     }
 
     public void ShowLossScreen() {

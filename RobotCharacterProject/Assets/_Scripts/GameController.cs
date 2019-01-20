@@ -30,7 +30,6 @@ public class GameController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         //_playerRef = FindObjectOfType<Character>(); //get player reference
-        _sceneLoader = GetComponent<LevelLoader>();
         SceneManager.activeSceneChanged += UpdateReferences;
     }
 
@@ -40,6 +39,7 @@ public class GameController : MonoBehaviour
     /// <param name="arg0"></param>
     /// <param name="arg1"></param>
     private void UpdateReferences(Scene arg0, Scene arg1) {
+        _sceneLoader = FindObjectOfType<LevelLoader>();
         //get ref to player, and their death event
         _playerRef = FindObjectOfType<Character>();
         _playerRef.OnDeath += GameLoss;
@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
         _pauseController.OnPause += UpdatePauseState;
 
         //Can't figure out why event subscriptions were breaking with this script. Have to get reference instead.
-        _endScreenController = FindObjectOfType<UIEndScreenController>();
+        //_endScreenController = FindObjectOfType<UIEndScreenController>();
 
         _isGameActive = true;
         _isGamePaused = false;
@@ -60,8 +60,7 @@ public class GameController : MonoBehaviour
     /// player died and game is over
     /// </summary>
     private void GameLoss() {
-        //if (OnPlayerDeath != null) OnPlayerDeath();
-        _endScreenController.ShowLossScreen();
+        if (OnPlayerDeath != null) OnPlayerDeath();
         _isGameActive = false;
         Time.timeScale = 0;
     }
@@ -70,8 +69,7 @@ public class GameController : MonoBehaviour
     /// Cannons are defeated
     /// </summary>
     private void GameWon() {
-        //if (OnGameWin != null) OnGameWin();
-        _endScreenController.ShowWinScreen();
+        if (OnGameWin != null) OnGameWin();
         _isGameActive = false;
         Time.timeScale = 0;
     }
