@@ -7,19 +7,18 @@ public class PauseController : MonoBehaviour
     [SerializeField]
     private GameObject _pauseScreen;
 
-    public delegate void PausedEvent();
+    public delegate void PausedEvent(bool pauseState);
     public PausedEvent OnPause;
 
     private bool _isPaused = false;
-    public bool Paused { get { return _isPaused; } }
-
+    
     private void Start() {
         _isPaused = false;
         _pauseScreen.SetActive(false);
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && GameController.Instance.GameActive) {
             TogglePause();
         }
     }
@@ -38,6 +37,7 @@ public class PauseController : MonoBehaviour
             _pauseScreen.SetActive(true);
             Time.timeScale = 0;
         }
+        OnPause(_isPaused);
     }
 
 }

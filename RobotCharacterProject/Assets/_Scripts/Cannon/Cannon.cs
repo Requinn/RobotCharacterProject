@@ -35,7 +35,7 @@ public class Cannon : MonoBehaviour
     /// <returns></returns>
     private IEnumerator FiringRoutine() {
         yield return new WaitForSeconds(_initialDelay);
-        while (GameController.Instance.IsGameActive()) {
+        while (GameController.Instance.GameActive) {
             AssignColor();
             yield return new WaitForSeconds(_fireDelay + UnityEngine.Random.Range(-_fireDelayDeviation / 2, _fireDelayDeviation));
             //could object pool, but not enough projectiles to warrant for now?

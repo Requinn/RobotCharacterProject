@@ -81,7 +81,7 @@ public class Character : Entity
 
     float movement;
     private void Update() {
-        if (GameController.Instance.GetPaused()) {
+        if (GameController.Instance.Paused || !GameController.Instance.GameActive) {
             return;
         }
         if (_canMove) {

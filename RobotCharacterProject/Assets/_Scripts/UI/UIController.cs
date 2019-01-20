@@ -26,13 +26,6 @@ public class UIController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Unpause
-    /// </summary>
-    public void Resume() {
-        _controllerRef.TogglePause();
-    }
-
-    /// <summary>
     /// Quit to desktop
     /// </summary>
     public void Quit() {

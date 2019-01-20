@@ -51,7 +51,6 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         while(asyncLoad.progress < .89f) {
-            Debug.Log(asyncLoad.progress);
             yield return null;
         }
 
