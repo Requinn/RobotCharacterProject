@@ -6,30 +6,28 @@ using UnityEngine;
 /// Handles UI button events in a level
 /// </summary>
 public class UIController : MonoBehaviour {
+    [SerializeField]
+    private LevelLoader _sceneLoader;
 
-    private GameController _controllerRef;
-    private void Start() {
-        _controllerRef = GameController.Instance;
-    }
     /// <summary>
     /// Reload the level
     /// </summary>
     public void RestartGame() {
-        LevelLoader.Instance.ReloadScene();
+        _sceneLoader.ReloadScene();
     }
 
     /// <summary>
     /// Load Main Menu
     /// </summary>
     public void MainMenu() {
-        LevelLoader.Instance.LoadMainMenu();
+        _sceneLoader.LoadMainMenu();
     }
 
     /// <summary>
     /// Quit to desktop
     /// </summary>
     public void Quit() {
-        _controllerRef.QuitGame();
+        GameController.Instance.QuitGame();
     }
 
 }

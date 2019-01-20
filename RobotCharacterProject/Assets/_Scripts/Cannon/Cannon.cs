@@ -38,7 +38,8 @@ public class Cannon : MonoBehaviour
         while (GameController.Instance.GameActive) {
             AssignColor();
             yield return new WaitForSeconds(_fireDelay + UnityEngine.Random.Range(-_fireDelayDeviation / 2, _fireDelayDeviation));
-            //could object pool, but not enough projectiles to warrant for now?
+            if (!GameController.Instance.GameActive) { yield break; }
+            //could object pool, but not enough projectiles to warrant
             Projectile p = Instantiate(_projectile, _barrelPoint.transform.position, _barrelPoint.transform.rotation);
             p.Initialize(_projectileSpeed, _currentType);
             yield return null;

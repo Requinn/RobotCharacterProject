@@ -20,8 +20,9 @@ public class SceneLoadFade : MonoBehaviour
     }
 
     private void Start() {
-        LevelLoader.Instance.OnStartLoad += FadeIn;
-        LevelLoader.Instance.OnEndLoad += FadeOut;
+        LevelLoader LL = FindObjectOfType<LevelLoader>();
+        LL.OnStartLoad += FadeIn;
+        LL.OnEndLoad += FadeOut;
     }
 
     /// <summary>

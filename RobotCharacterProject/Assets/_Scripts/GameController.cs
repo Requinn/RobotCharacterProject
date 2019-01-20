@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     /// <param name="arg0"></param>
     /// <param name="arg1"></param>
     private void UpdateReferences(Scene arg0, Scene arg1) {
+        if(arg1.buildIndex == 0) { return; }
         //get ref to player, and their death event
         _playerRef = FindObjectOfType<Character>();
         _playerRef.OnDeath += GameLoss;

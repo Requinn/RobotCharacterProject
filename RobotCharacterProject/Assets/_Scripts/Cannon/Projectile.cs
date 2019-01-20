@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         //game isn't running, projectile does nothing
-        if (!GameController.Instance.GameActive) { Destroy(gameObject); }
+        if (!GameController.Instance.GameActive) { Destroy(gameObject); return; }
         if (_isHostile && ( other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black))) {
             GameController.Instance.GetPlayerReference().TakeDamage(damage);
             Destroy(gameObject);
