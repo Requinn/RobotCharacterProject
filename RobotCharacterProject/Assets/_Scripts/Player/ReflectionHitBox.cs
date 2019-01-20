@@ -35,10 +35,11 @@ public class ReflectionHitBox : MonoBehaviour
     /// reflect the projectile and return true if we reflected successfully
     /// </summary>
     /// <returns>returns true on reflect</returns>
-    public bool DoReflect(ColorCode.ColorType color) {
+    public bool DoReflect(ColorCode.ColorType color, out bool isPerfect) {
         if (p && p.IsHostile && p.GetColorType() == color) {
             //super easy way to detect if projectile is in front of us by checking along the only axis we share with projectiles
             if (p.transform.position.z < _owner.transform.position.z) {
+                isPerfect = false;
                 return false;
             }
             //distance to player
@@ -47,15 +48,16 @@ public class ReflectionHitBox : MonoBehaviour
             if(distance >= _perfectRangeMin && distance < _perfectRangeMax) {
                 p.Reflect(true);
                 _audioPlayer.PlayOneShot(_perfectSound);
-                //GameController Add Score
+                isPerfect = true;
                 return true;
             }else {
                 p.Reflect(false);
                 _audioPlayer.PlayOneShot(_normalSound);
-                //GameController Add Score
+                isPerfect = false;
                 return true;
             }
         }else {
+            isPerfect = false;
             return false;
         }
     }

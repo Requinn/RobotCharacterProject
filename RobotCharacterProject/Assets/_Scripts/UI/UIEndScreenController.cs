@@ -9,7 +9,8 @@ public class UIEndScreenController : MonoBehaviour
 {
     [SerializeField]
     private GameObject _winScreen, _loseScreen;
-
+    [SerializeField]
+    private Text _winScreenScore, _loseScreenScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +22,13 @@ public class UIEndScreenController : MonoBehaviour
         GameController.Instance.OnPlayerDeath += ShowLossScreen;
     }
 
-    public void ShowLossScreen() {
+    public void ShowLossScreen(int finalScore) {
+        _loseScreenScore.text = finalScore.ToString() + "pts";
         _loseScreen.SetActive(true);
     }
 
-    public void ShowWinScreen() {
+    public void ShowWinScreen(int finalScore) {
+        _winScreenScore.text = finalScore.ToString() + "pts";
         _winScreen.SetActive(true);
     }
 }

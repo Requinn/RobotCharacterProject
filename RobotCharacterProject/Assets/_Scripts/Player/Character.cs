@@ -28,6 +28,9 @@ public class Character : Entity
     public delegate void ColorCycleEvent(int direction);
     public ColorCycleEvent OnColorCycle;
 
+    public delegate void PunchEvent(bool perfect);
+    public PunchEvent OnPunchSuccess;
+
     public override void Start() {
         base.Start();
         _movementComponent = GetComponent<Movement>();
@@ -169,8 +172,11 @@ public class Character : Entity
     private IEnumerator Punch() {
         SetMovement(false);
         yield return new WaitForSeconds(.55f);
+        bool _perfectPunch = false;
         //activate a hitbox to deflect the projectile
-        _reflectionHitBox.DoReflect(_currentType);
+        if (_reflectionHitBox.DoReflect(_currentType, out _perfectPunch)) {
+            if(OnPunchSuccess != null) OnPunchSuccess(_perfectPunch);
+        }
         yield return new WaitForSeconds(0.1f);
         SetMovement(true);
         yield return null;

@@ -10,8 +10,9 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     private Character _playerRef;
+    private ScoreHandler _scoreHandler;
 
-    public delegate void GameOverEvent();
+    public delegate void GameOverEvent(int finalScore);
     public GameOverEvent OnGameWin, OnPlayerDeath;
 
     private bool _isGameActive = true, _isGamePaused = false;
@@ -40,6 +41,9 @@ public class GameController : MonoBehaviour
         //get ref to player, and their death event
         _playerRef = FindObjectOfType<Character>();
         _playerRef.OnDeath += GameLoss;
+        _scoreHandler = FindObjectOfType<ScoreHandler>();
+        _playerRef.OnPunchSuccess += _scoreHandler.UpdateScore;  
+
         //get the death event of the enemy
         FindObjectOfType<CannonController>().OnDeath += GameWon;
         //get pause event
@@ -53,7 +57,7 @@ public class GameController : MonoBehaviour
     /// player died and game is over
     /// </summary>
     private void GameLoss() {
-        if (OnPlayerDeath != null) OnPlayerDeath();
+        if (OnPlayerDeath != null) OnPlayerDeath(_scoreHandler.Score);
         _playerRef.SetMovement(false);
         _isGameActive = false;
     }
@@ -62,7 +66,7 @@ public class GameController : MonoBehaviour
     /// Cannons are defeated
     /// </summary>
     private void GameWon() {
-        if (OnGameWin != null) OnGameWin();
+        if (OnGameWin != null) OnGameWin(_scoreHandler.Score);
         _playerRef.SetMovement(false);
         _isGameActive = false;
     }
