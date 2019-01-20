@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     private Character _playerRef;
     [SerializeField]
     private LevelLoader _sceneLoader;
+    [SerializeField]
+    private PauseController _pauseController;
 
     private void Awake() {
         if(Instance != null && Instance != this) {
@@ -23,16 +25,25 @@ public class GameController : MonoBehaviour
         }
         //_playerRef = FindObjectOfType<Character>(); //get player reference
         _sceneLoader = GetComponent<LevelLoader>();
-        SceneManager.activeSceneChanged += UpdatePlayerReference;
+        SceneManager.activeSceneChanged += UpdateReferences;
+    }
+
+    public bool GetPaused() {
+        return _pauseController.Paused;
+    }
+
+    public void TogglePause() {
+        _pauseController.TogglePause();
     }
 
     /// <summary>
-    /// Update the player ref whenever we experience a scene change
+    /// Update References
     /// </summary>
     /// <param name="arg0"></param>
     /// <param name="arg1"></param>
-    private void UpdatePlayerReference(Scene arg0, Scene arg1) {
+    private void UpdateReferences(Scene arg0, Scene arg1) {
         _playerRef = FindObjectOfType<Character>();
+        _pauseController = FindObjectOfType<PauseController>();
     }
 
     public Character GetPlayerReference() {
@@ -43,12 +54,20 @@ public class GameController : MonoBehaviour
         return _sceneLoader;
     }
 
-    public void GameOver() {
+    /// <summary>
+    /// Sets the game over UI for either win or loss
+    /// </summary>
+    /// <param name="screenCode">1 = win, 2 = player death, 3 = castle death</param>
+    public void GameOver(int screenCode) {
         //Pop up game over UI
         Debug.Log("GameOver");
     }
 
     public bool IsGameActive() {
         return _playerRef.isAlive();
+    }
+
+    public void QuitGame() {
+        Application.Quit(0);
     }
 }

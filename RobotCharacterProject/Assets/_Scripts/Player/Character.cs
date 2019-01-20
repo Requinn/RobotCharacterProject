@@ -81,6 +81,9 @@ public class Character : Entity
 
     float movement;
     private void Update() {
+        if (GameController.Instance.GetPaused()) {
+            return;
+        }
         if (_canMove) {
             //MousInput
             MouseInput();
