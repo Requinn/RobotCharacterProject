@@ -20,12 +20,16 @@ public class Cannon : MonoBehaviour
     private float _projectileSpeed; //how fast does the projectile move
     [SerializeField]
     private GameObject _barrelPoint;
+    [SerializeField]
+    private AudioClip _fireSound;
 
+    private AudioSource _audioPlayer;
     private ColorCode.ColorType _currentType;
     //private WaitForSeconds _fireWait;
 
     private void Start() {
         StartCoroutine(FiringRoutine());
+        _audioPlayer = GetComponent<AudioSource>();
         //_fireWait = new WaitForSeconds(_fireDelay);
     }
 
@@ -41,6 +45,7 @@ public class Cannon : MonoBehaviour
             if (!GameController.Instance.GameActive) { yield break; }
             //could object pool, but not enough projectiles to warrant
             Projectile p = Instantiate(_projectile, _barrelPoint.transform.position, _barrelPoint.transform.rotation);
+            _audioPlayer.PlayOneShot(_fireSound);
             p.Initialize(_projectileSpeed, _currentType);
             yield return null;
         }

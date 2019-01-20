@@ -59,12 +59,15 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         //game isn't running, projectile does nothing
         if (!GameController.Instance.GameActive) { Destroy(gameObject); return; }
-        if (_isHostile && ( other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black))) {
+        if (_isHostile && ( other.CompareTag("Player") || ((other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black)))) {
             GameController.Instance.GetPlayerReference().TakeDamage(damage);
             Destroy(gameObject);
         }
         else if ((other.CompareTag("Cannon"))) {
             other.GetComponent<CannonController>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Base") && _assignedColor == ColorCode.ColorType.black){
             Destroy(gameObject);
         }
     }

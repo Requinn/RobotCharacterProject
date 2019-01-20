@@ -12,9 +12,14 @@ public class ReflectionHitBox : MonoBehaviour
 
     [SerializeField]
     private float _perfectRangeMin = 0.5f, _perfectRangeMax = 1f;
+    [SerializeField]
+    private AudioClip _perfectSound, _normalSound;
+
+    private AudioSource _audioPlayer;
 
     private void Start() {
         _owner = GetComponentInParent<Character>();
+        _audioPlayer = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other) {
         p = other.GetComponent<Projectile>();
@@ -41,10 +46,12 @@ public class ReflectionHitBox : MonoBehaviour
             //sweet spot
             if(distance >= _perfectRangeMin && distance < _perfectRangeMax) {
                 p.Reflect(true);
+                _audioPlayer.PlayOneShot(_perfectSound);
                 //GameController Add Score
                 return true;
             }else {
                 p.Reflect(false);
+                _audioPlayer.PlayOneShot(_normalSound);
                 //GameController Add Score
                 return true;
             }

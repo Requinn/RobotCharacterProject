@@ -4910,9 +4910,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Punchy''s Protection
+  m_Text: 'Punchy''s Palace
 
-    Service'
+    Protection'
 --- !u!222 &2050123456
 CanvasRenderer:
   m_ObjectHideFlags: 0
