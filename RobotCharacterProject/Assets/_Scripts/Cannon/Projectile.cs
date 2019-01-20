@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody _rb;
     private ColorCode.ColorType _assignedColor;
     private Renderer _renderer;
+    private int damage = 1;
 
     /// <summary>
     /// Get the type of color
@@ -32,12 +33,21 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Change the velocity of this projectile
+    /// reflecting the projectil and check if it was a perfect reflection
     /// </summary>
     /// <param name="newVelocity"></param>
-    public void ChangeVelocity(Vector3 newVelocity) {
+    public void Reflect(bool isPerfect) {
         //could rotate the projectiles to face direction, but they're also just spheres right now so it doesn't matter really
-        _rb.velocity = newVelocity;
+        if (!isPerfect) {
+            //plain reflections go normal speed and do 5 damage
+            _rb.velocity *= -1;
+            damage *= 5;
+        }
+        else {
+            //perfects move double speed and do double damage
+            _rb.velocity *= -2;
+            damage *= 10;
+        }
     }
 
     /// <summary>
@@ -46,9 +56,11 @@ public class Projectile : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black)) {
-            GameController.Instance.GetPlayerReference().TakeDamage(1);
+            GameController.Instance.GetPlayerReference().TakeDamage(damage);
             Destroy(gameObject);
-        }else if((other.CompareTag("Base") && _assignedColor == ColorCode.ColorType.black)) {
+        }
+        else if ((other.CompareTag("Cannon"))) {
+            other.GetComponent<CannonController>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

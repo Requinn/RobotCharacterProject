@@ -27,9 +27,9 @@ public class ReflectionHitBox : MonoBehaviour
     }
 
     /// <summary>
-    /// reflect the projectile and return if it was a "perfect" reflect
+    /// reflect the projectile and return true if we reflected successfully
     /// </summary>
-    /// <returns>returns true on "perfect"</returns>
+    /// <returns>returns true on reflect</returns>
     public bool DoReflect(ColorCode.ColorType color) {
         if (p && p.GetColorType() == color) {
             //super easy way to detect if projectile is in front of us by checking along the only axis we share with projectiles
@@ -40,13 +40,13 @@ public class ReflectionHitBox : MonoBehaviour
             float distance = Vector3.Distance(_owner.GetCenter(), p.transform.position);
             //sweet spot
             if(distance >= _perfectRangeMin && distance < _perfectRangeMax) {
-                p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity * 2f);
+                p.Reflect(true);
                 //GameController Add Score
                 return true;
             }else {
-                p.ChangeVelocity(-p.GetComponent<Rigidbody>().velocity);
+                p.Reflect(false);
                 //GameController Add Score
-                return false;
+                return true;
             }
         }else {
             return false;

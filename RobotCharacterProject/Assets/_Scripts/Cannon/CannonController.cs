@@ -19,11 +19,11 @@ public class CannonController : Entity
     public override void Start() {
         base.Start();
 
-        _cannon2.SetActive(false);
-        _cannon2.transform.position = new Vector3(_cannon2.transform.position.x, _cannon2.transform.position.y, _initialZPosition);
+        _cannon2.GetComponent<Cannon>().enabled = false;
+        _cannon2.transform.localPosition = new Vector3(_cannon2.transform.localPosition.x, _cannon2.transform.localPosition.y, _initialZPosition);
 
-        _cannon3.SetActive(false);
-        _cannon3.transform.position = new Vector3(_cannon3.transform.position.x, _cannon3.transform.position.y, _initialZPosition);
+        _cannon3.GetComponent<Cannon>().enabled = false;
+        _cannon3.transform.localPosition = new Vector3(_cannon3.transform.localPosition.x, _cannon3.transform.localPosition.y, _initialZPosition);
     }
 
     /// <summary>
@@ -34,13 +34,30 @@ public class CannonController : Entity
         base.TakeDamage(damage);
         if (_currentStage == 0 && CurrentHealthPercent() <= _firstThreshold) {
             _currentStage++;
-            //bring out second cannon
+            StartCoroutine(BringOutCannon(_cannon2));
 
         }
 
         if (_currentStage == 1 && CurrentHealthPercent() <= _secondThreshold) {
             _currentStage++;
-            //bring out third cannon
+            StartCoroutine(BringOutCannon(_cannon3));
         }
+    }
+
+    /// <summary>
+    /// move the cannon then enable it
+    /// </summary>
+    /// <param name="cannonToMove"></param>
+    /// <returns></returns>
+    private IEnumerator BringOutCannon(GameObject cannonToMove) {
+        float time = 0f;
+        Vector3 startPosition = cannonToMove.transform.localPosition;
+        Vector3 finalPosition = new Vector3(startPosition.x, startPosition.y, _finalZPosition);
+        while (cannonToMove.transform.localPosition.z != _finalZPosition) {
+            cannonToMove.transform.localPosition = Vector3.Lerp(startPosition, finalPosition, time);
+            time += Time.deltaTime * 2f;
+            yield return null;
+        }
+        cannonToMove.GetComponent<Cannon>().enabled = true;
     }
 }

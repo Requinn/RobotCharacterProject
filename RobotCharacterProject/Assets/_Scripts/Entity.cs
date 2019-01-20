@@ -39,7 +39,7 @@ public class Entity : MonoBehaviour
     /// Handle any special cases on death, if any
     /// </summary>
     protected virtual void HandleDeath() {
-        OnDeath();
+        if(OnDeath != null) OnDeath();
     }
 
     /// <summary>
