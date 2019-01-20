@@ -6,10 +6,9 @@ using UnityEngine;
 /// <summary>
 /// Character Controller class. Handles inputs for movement and interactions.
 /// </summary>
-public class Character : MonoBehaviour
+public class Character : Entity
 {
-    [SerializeField]
-    private int _health = 5;
+    [Header("Character Properties")]
     [SerializeField]
     private ReflectionHitBox _reflectionHitBox;
     [SerializeField]
@@ -26,7 +25,8 @@ public class Character : MonoBehaviour
     private ColorCode.ColorType _currentType = ColorCode.ColorType.orange;
     private int _currentTypeIndex;
 
-    private void Start() {
+    public override void Start() {
+        base.Start();
         _movementComponent = GetComponent<Movement>();
         _animationComponent = GetComponent<AnimationHandler>();
         _approximateCenterHeight = new Vector3(0f, 0.75f, 0f);
@@ -179,24 +179,18 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
-    /// Remove health
+    /// Call base take damage and update UI
     /// </summary>
-    public void TakeDamage() {
-        _health--;
-        if(_health <= 0) {
-            _health = 0;
-            Kill();
-        }
-        //updateUI
-
+    public override void TakeDamage(int damage) {
+        base.TakeDamage(damage);
     }
 
     /// <summary>
     /// Handle player death and relay to GameController
     /// </summary>
-    public void Kill() {
+    protected override void HandleDeath() {
         SetMovement(false);
         gameObject.SetActive(false);
-        GameController.Instance.GameOver();
+        base.HandleDeath();
     }
 }

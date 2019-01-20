@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black)) {
-            GameController.Instance.GetPlayerReference().TakeDamage();
+            GameController.Instance.GetPlayerReference().TakeDamage(1);
             Destroy(gameObject);
         }else if((other.CompareTag("Base") && _assignedColor == ColorCode.ColorType.black)) {
             Destroy(gameObject);

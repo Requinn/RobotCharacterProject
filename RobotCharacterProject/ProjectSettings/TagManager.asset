@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Ground
   - Interactable
-  - KillVolume
   - Base
+  - Cannon
   layers:
   - Default
   - TransparentFX
