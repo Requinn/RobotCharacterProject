@@ -183,6 +183,9 @@ public class Character : Entity
     public void SetMovement(bool canMove) {
         _canMove = canMove;
         _movementComponent.SetMovement(canMove);
+        if (!canMove) {
+            _animationComponent.SetSpeed(0);
+        }
     }
 
     /// <summary>

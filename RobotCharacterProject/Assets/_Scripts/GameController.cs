@@ -10,7 +10,6 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     private Character _playerRef;
-    private LevelLoader _sceneLoader;
     private PauseController _pauseController;
 
     public delegate void GameOverEvent();
@@ -37,7 +36,6 @@ public class GameController : MonoBehaviour
     /// <param name="arg0"></param>
     /// <param name="arg1"></param>
     private void UpdateReferences(Scene arg0, Scene arg1) {
-        _sceneLoader = FindObjectOfType<LevelLoader>();
         //get ref to player, and their death event
         _playerRef = FindObjectOfType<Character>();
         _playerRef.OnDeath += GameLoss;
@@ -56,8 +54,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void GameLoss() {
         if (OnPlayerDeath != null) OnPlayerDeath();
+        _playerRef.SetMovement(false);
         _isGameActive = false;
-        Time.timeScale = 0;
     }
 
     /// <summary>
@@ -65,8 +63,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void GameWon() {
         if (OnGameWin != null) OnGameWin();
+        _playerRef.SetMovement(false);
         _isGameActive = false;
-        Time.timeScale = 0;
     }
 
     private void UpdatePauseState(bool state) {
@@ -75,10 +73,6 @@ public class GameController : MonoBehaviour
 
     public Character GetPlayerReference() {
         return _playerRef;
-    }
-
-    public LevelLoader GetSceneLoader() {
-        return _sceneLoader;
     }
 
     public void QuitGame() {

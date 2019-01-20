@@ -15,14 +15,14 @@ public class UIController : MonoBehaviour {
     /// Reload the level
     /// </summary>
     public void RestartGame() {
-        _controllerRef.GetSceneLoader().ReloadScene();
+        LevelLoader.Instance.ReloadScene();
     }
 
     /// <summary>
     /// Load Main Menu
     /// </summary>
     public void MainMenu() {
-        _controllerRef.GetSceneLoader().LoadMainMenu();
+        LevelLoader.Instance.LoadMainMenu();
     }
 
     /// <summary>

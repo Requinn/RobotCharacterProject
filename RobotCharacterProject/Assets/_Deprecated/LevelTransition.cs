@@ -9,7 +9,7 @@ public class LevelTransition : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            GameController.Instance.GetSceneLoader().LoadNextLevel();
+            //GameController.Instance.GetSceneLoader().LoadNextLevel();
         }
     }
 }
