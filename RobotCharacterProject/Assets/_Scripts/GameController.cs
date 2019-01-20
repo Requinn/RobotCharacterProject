@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour
         //if (OnPlayerDeath != null) OnPlayerDeath();
         _endScreenController.ShowLossScreen();
         _isGameActive = false;
+        Time.timeScale = 0;
     }
 
     /// <summary>
@@ -72,6 +73,7 @@ public class GameController : MonoBehaviour
         //if (OnGameWin != null) OnGameWin();
         _endScreenController.ShowWinScreen();
         _isGameActive = false;
+        Time.timeScale = 0;
     }
 
     private void UpdatePauseState(bool state) {

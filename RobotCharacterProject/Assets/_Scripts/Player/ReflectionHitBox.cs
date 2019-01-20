@@ -31,7 +31,7 @@ public class ReflectionHitBox : MonoBehaviour
     /// </summary>
     /// <returns>returns true on reflect</returns>
     public bool DoReflect(ColorCode.ColorType color) {
-        if (p && p.GetColorType() == color) {
+        if (p && p.IsHostile && p.GetColorType() == color) {
             //super easy way to detect if projectile is in front of us by checking along the only axis we share with projectiles
             if (p.transform.position.z < _owner.transform.position.z) {
                 return false;

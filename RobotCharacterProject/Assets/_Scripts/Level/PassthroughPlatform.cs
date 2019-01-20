@@ -24,11 +24,11 @@ public class PassthroughPlatform : MonoBehaviour
         else {
             //Check if the player is under or above the platform, if they are below disable collider, if they are above re-enable it
             //using raw position becasue it's located at the feet
-            if (_player.transform.position.y < transform.position.y) {
-                _platform.enabled = false;
+            if (_player.transform.position.y > transform.position.y + 0.1f) {
+                _platform.enabled = true;
             }
             else {
-                _platform.enabled = true;
+                _platform.enabled = false;
             }
         }
     }

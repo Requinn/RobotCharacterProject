@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     private ColorCode.ColorType _assignedColor;
     private Renderer _renderer;
     private int damage = 1;
-
+    private bool _isHostile = true; //can this harm the player?
+    public bool IsHostile { get { return _isHostile; } }
     /// <summary>
     /// Get the type of color
     /// </summary>
@@ -37,15 +38,16 @@ public class Projectile : MonoBehaviour
     /// </summary>
     /// <param name="newVelocity"></param>
     public void Reflect(bool isPerfect) {
+        _isHostile = false;
         //could rotate the projectiles to face direction, but they're also just spheres right now so it doesn't matter really
         if (!isPerfect) {
             //plain reflections go normal speed and do 5 damage
-            _rb.velocity *= -1;
+            _rb.velocity *= -2;
             damage *= 5;
         }
         else {
             //perfects move double speed and do double damage
-            _rb.velocity *= -2;
+            _rb.velocity *= -4;
             damage *= 10;
         }
     }
@@ -55,7 +57,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black)) {
+        if (_isHostile && ( other.CompareTag("Player") || (other.CompareTag("Base") && _assignedColor != ColorCode.ColorType.black))) {
             GameController.Instance.GetPlayerReference().TakeDamage(damage);
             Destroy(gameObject);
         }
