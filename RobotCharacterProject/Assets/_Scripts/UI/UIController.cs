@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Handles UI button events
+/// Handles UI button events in a level
 /// </summary>
 public class UIController : MonoBehaviour {
 
@@ -30,13 +30,6 @@ public class UIController : MonoBehaviour {
     /// </summary>
     public void Quit() {
         _controllerRef.QuitGame();
-    }
-
-    /// <summary>
-    /// Start normal game
-    /// </summary>
-    public void StartGame() {
-        _controllerRef.GetSceneLoader().LoadLevel(1);
     }
 
 }

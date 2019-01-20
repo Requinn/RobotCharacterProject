@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour
     private Character _playerRef;
     private LevelLoader _sceneLoader;
     private PauseController _pauseController;
-    private UIEndScreenController _endScreenController;
 
     public delegate void GameOverEvent();
     public GameOverEvent OnGameWin, OnPlayerDeath;
@@ -29,7 +28,6 @@ public class GameController : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        //_playerRef = FindObjectOfType<Character>(); //get player reference
         SceneManager.activeSceneChanged += UpdateReferences;
     }
 
@@ -48,9 +46,6 @@ public class GameController : MonoBehaviour
 
         _pauseController = FindObjectOfType<PauseController>();
         _pauseController.OnPause += UpdatePauseState;
-
-        //Can't figure out why event subscriptions were breaking with this script. Have to get reference instead.
-        //_endScreenController = FindObjectOfType<UIEndScreenController>();
 
         _isGameActive = true;
         _isGamePaused = false;

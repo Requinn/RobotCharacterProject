@@ -20,8 +20,8 @@ public class SceneLoadFade : MonoBehaviour
     }
 
     private void Start() {
-        GameController.Instance.GetSceneLoader().OnStartLoad += FadeIn;
-        GameController.Instance.GetSceneLoader().OnEndLoad += FadeOut;
+        LevelLoader.Instance.OnStartLoad += FadeIn;
+        LevelLoader.Instance.OnEndLoad += FadeOut;
     }
 
     /// <summary>

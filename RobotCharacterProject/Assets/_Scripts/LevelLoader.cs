@@ -7,12 +7,17 @@ using System.Collections;
 /// </summary>
 public class LevelLoader : MonoBehaviour
 {
+    public static LevelLoader Instance; //static ref, there should only be one of these anyways
+
     public delegate void StartLoadEvent();
     public StartLoadEvent OnStartLoad;
 
     public delegate void EndLoadEvent();
     public EndLoadEvent OnEndLoad;
-     
+
+    private void Awake() {
+        Instance = this;
+    }
     /// <summary>
     /// Loads the next scene in the build settings
     /// </summary>
