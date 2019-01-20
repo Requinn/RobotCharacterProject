@@ -4416,7 +4416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ef07637c84ded4bbdd67fb330ea3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 200
   _uiHealthComponent: {fileID: 547156409}
   _firstThreshold: 0.8
   _secondThreshold: 0.6
@@ -6921,7 +6921,7 @@ RectTransform:
   m_GameObject: {fileID: 1137203719}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 1188509693}
   m_RootOrder: 2
@@ -6929,7 +6929,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 44.985157, y: -129.9624}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137203721
 MonoBehaviour:
@@ -6975,6 +6975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1188509693}
+  - component: {fileID: 1188509694}
   m_Layer: 5
   m_Name: ColorCycler
   m_TagString: Untagged
@@ -7004,6 +7005,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1188509694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188509692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aec90e4830545479c26b317ab39717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainColorObj: {fileID: 1110560720}
+  _leftColorObj: {fileID: 1287597443}
+  _rightColorObj: {fileID: 1137203721}
 --- !u!1 &1196395100
 GameObject:
   m_ObjectHideFlags: 0
@@ -8432,7 +8448,7 @@ RectTransform:
   m_GameObject: {fileID: 1287597441}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 1188509693}
   m_RootOrder: 1
@@ -8440,7 +8456,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -44.985157, y: -129.9624}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1287597443
 MonoBehaviour:

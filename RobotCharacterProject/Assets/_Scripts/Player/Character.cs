@@ -22,8 +22,11 @@ public class Character : Entity
     private RaycastHit _hit;
     private bool _canMove = true;
 
-    private ColorCode.ColorType _currentType = ColorCode.ColorType.orange;
+    private ColorCode.ColorType _currentType = ColorCode.ColorType.blue;
     private int _currentTypeIndex;
+
+    public delegate void ColorCycleEvent(int direction);
+    public ColorCycleEvent OnColorCycle;
 
     public override void Start() {
         base.Start();
@@ -44,6 +47,7 @@ public class Character : Entity
     /// Cycles the colors on the player
     /// </summary>
     private void CycleColor(int direction) {
+        OnColorCycle(direction);
         _currentTypeIndex += direction;
         if(_currentTypeIndex < 0) {
             _currentTypeIndex = 2;
