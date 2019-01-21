@@ -71,15 +71,15 @@ public class GameController : MonoBehaviour
         _isGameActive = false;
     }
 
+    /// <summary>
+    /// Updates pause state from PauseController
+    /// </summary>
+    /// <param name="state"></param>
     private void UpdatePauseState(bool state) {
         _isGamePaused = state;
     }
 
     public Character GetPlayerReference() {
         return _playerRef;
-    }
-
-    public void QuitGame() {
-        Application.Quit(0);
     }
 }

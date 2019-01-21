@@ -27,7 +27,14 @@ public class UIController : MonoBehaviour {
     /// Quit to desktop
     /// </summary>
     public void Quit() {
-        GameController.Instance.QuitGame();
+        Application.Quit(0);
+    }
+
+    /// <summary>
+    /// Play the game
+    /// </summary>
+    public void StartGame() {
+        _sceneLoader.LoadLevel(1);
     }
 
 }

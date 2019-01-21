@@ -1,6 +1,9 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 
+/// <summary>
+/// Updates healthbars
+/// </summary>
 public class UIHealth : MonoBehaviour
 {
     [SerializeField]

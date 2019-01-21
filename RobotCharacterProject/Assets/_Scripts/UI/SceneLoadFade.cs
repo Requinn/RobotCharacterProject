@@ -45,6 +45,7 @@ public class SceneLoadFade : MonoBehaviour
     /// <param name="from"></param>
     /// <param name="to"></param>
     private void InitiateFade(float from, float to) {
+        //stop current fade and go into the new one
         if(_fadeRoutine != null) StopCoroutine(_fadeRoutine);
         _fadeCanvas.gameObject.SetActive(true);
         _fadeRoutine = StartCoroutine(FadeFromTo(from, to));

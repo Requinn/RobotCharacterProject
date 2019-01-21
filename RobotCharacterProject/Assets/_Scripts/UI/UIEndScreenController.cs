@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// Handles showing the end screen
+/// Handles showing the end screen and score
 /// </summary>
 public class UIEndScreenController : MonoBehaviour
 {

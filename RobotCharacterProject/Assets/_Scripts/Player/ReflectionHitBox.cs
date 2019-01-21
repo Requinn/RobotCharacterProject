@@ -20,6 +20,9 @@ public class ReflectionHitBox : MonoBehaviour
     private void Start() {
         _owner = GetComponentInParent<Character>();
         _audioPlayer = GetComponent<AudioSource>();
+        //adjusted for sqrmag check later
+        _perfectRangeMin *= _perfectRangeMin;
+        _perfectRangeMax *= _perfectRangeMax;
     }
     private void OnTriggerEnter(Collider other) {
         p = other.GetComponent<Projectile>();
@@ -43,7 +46,7 @@ public class ReflectionHitBox : MonoBehaviour
                 return false;
             }
             //distance to player
-            float distance = Vector3.Distance(_owner.GetCenter(), p.transform.position);
+            float distance = Vector3.SqrMagnitude(_owner.GetCenter() - p.transform.position);
             //sweet spot
             if(distance >= _perfectRangeMin && distance < _perfectRangeMax) {
                 p.Reflect(true);

@@ -1,6 +1,9 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 
+/// <summary>
+/// Stores and updates the game score
+/// </summary>
 public class ScoreHandler : MonoBehaviour
 {
     [SerializeField]
